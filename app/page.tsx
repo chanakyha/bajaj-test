@@ -121,7 +121,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="border-t-slate-800 fixed bottom-0 p-2 w-full">
+      <div className="border-t-slate-800 fixed bottom-0 p-2 w-full flex justify-center">
         <h1>
           Made by{" "}
           <Link
