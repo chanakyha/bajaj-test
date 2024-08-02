@@ -5,11 +5,7 @@ import type { SelectProps } from "antd";
 import { useState } from "react";
 
 export default function Home() {
-  const sampleData = {
-    data: ["M", "1", "334", "b", "55", "z"],
-  };
-
-  const [input, setInput] = useState<string>(JSON.stringify(sampleData));
+  const [input, setInput] = useState<string>("");
   const [filter, setFilter] = useState<string[]>([]);
   const [responseData, setResponseData] = useState<any>();
 
