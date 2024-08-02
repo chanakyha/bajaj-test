@@ -16,23 +16,6 @@ export async function POST(request: Request) {
     email: "cl9448@srmist.edu.in",
   };
 
-  function isValidJSON(str: string) {
-    try {
-      JSON.parse(str);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  if (!isValidJSON(requestData)) {
-    return NextResponse.json({
-      ...data,
-      is_success: true,
-      reason: "Invalid JSON",
-    });
-  }
-
   interface separateDataType {
     numbers: string[];
     alphabets: string[];
@@ -70,7 +53,5 @@ export async function POST(request: Request) {
 
   console.log(finalOut);
 
-  return NextResponse.json({
-    status: "Success",
-  });
+  return NextResponse.json(finalOut);
 }

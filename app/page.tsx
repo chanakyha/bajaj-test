@@ -10,6 +10,8 @@ export default function Home() {
   };
 
   const [input, setInput] = useState<string>(JSON.stringify(sampleData));
+  const [filter, setFilter] = useState<string[]>([]);
+  const [responseData, setResponseData] = useState<any>();
 
   const options: SelectProps["options"] = [
     {
@@ -27,7 +29,7 @@ export default function Home() {
   ];
 
   const handleChange = (value: string[]) => {
-    console.log(`selected ${value}`);
+    setFilter(value);
   };
 
   const handleSubmit = async () => {
@@ -39,7 +41,7 @@ export default function Home() {
       },
     });
     if (response.status === 200) {
-      alert("Message sent successfully");
+      setResponseData(await response.json());
     } else {
       alert("Error sending message: " + response.status);
     }
@@ -47,7 +49,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen w-screen flex items-center justify-center bg-slate-200">
-      <div className="w-[30rem] max-w-6xl mx-auto bg-slate-300 p-5 md:p-16 rounded-md shadow-xl border border-slate-800/20 flex flex-col gap-2">
+      <div className="w-[40rem] max-w-6xl mx-auto bg-slate-300 p-5 md:p-16 rounded-md shadow-xl border border-slate-800/20 flex flex-col gap-2">
         <h1 className="text-center font-medium text-2xl">Frontend Code</h1>
         <Input
           size="middle"
@@ -73,6 +75,26 @@ export default function Home() {
             options={options}
           />
         </Space>
+        <div className=" flex flex-col">
+          {filter.includes("characters") && (
+            <div className="flex items-center gap-3">
+              <h1 className="font-bold">Characters:</h1>
+              <div>{JSON.stringify(responseData.alphabets)}</div>
+            </div>
+          )}
+          {filter.includes("numbers") && (
+            <div className="flex items-center gap-3">
+              <h1 className="font-bold">Numbers:</h1>
+              <div>{JSON.stringify(responseData.numbers)}</div>
+            </div>
+          )}
+          {filter.includes("highest-alphabets") && (
+            <div className="flex items-center gap-3">
+              <h1 className="font-bold">Highest Alphabets: </h1>
+              <div>{JSON.stringify(responseData.highest_alphabet)}</div>
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );
