@@ -41,6 +41,7 @@ export default function Home() {
       },
     });
     if (response.status === 200) {
+      alert("Response Accepted, Use Filter to check the responses");
       setResponseData(await response.json());
     } else {
       alert("Error sending message: " + response.status);
