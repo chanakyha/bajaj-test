@@ -28,7 +28,20 @@ export default function Home() {
     setFilter(value);
   };
 
+  function isValidJSON(str: string) {
+    try {
+      JSON.parse(str);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   const handleSubmit = async () => {
+    if (!isValidJSON(input)) {
+      return alert("Please enter a valid JSON");
+    }
+
     let response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/bfhl`, {
       method: "POST",
       body: JSON.stringify(JSON.parse(input)),
@@ -76,19 +89,19 @@ export default function Home() {
           {filter.includes("characters") && (
             <div className="flex items-center gap-3">
               <h1 className="font-bold">Characters:</h1>
-              <div>{JSON.stringify(responseData.alphabets)}</div>
+              <div>{JSON.stringify(responseData?.alphabets)}</div>
             </div>
           )}
           {filter.includes("numbers") && (
             <div className="flex items-center gap-3">
               <h1 className="font-bold">Numbers:</h1>
-              <div>{JSON.stringify(responseData.numbers)}</div>
+              <div>{JSON.stringify(responseData?.numbers)}</div>
             </div>
           )}
           {filter.includes("highest-alphabets") && (
             <div className="flex items-center gap-3">
               <h1 className="font-bold">Highest Alphabets: </h1>
-              <div>{JSON.stringify(responseData.highest_alphabet)}</div>
+              <div>{JSON.stringify(responseData?.highest_alphabet)}</div>
             </div>
           )}
         </div>
